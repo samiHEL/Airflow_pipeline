@@ -1,0 +1,72 @@
+# Pipeline de Données avec Apache Airflow
+
+Ce projet met en place un pipeline de données utilisant Apache Airflow pour traiter des fichiers CSV contenant des données immobilières. Le pipeline calcule la moyenne des prix des biens et stocke le résultat dans un nouveau fichier CSV.
+
+## Structure du Projet
+
+- `dags/`
+  - `housing_data_dag.py`: Fichier de définition du DAG.
+- `process_housing_data.py`: Script Python qui traite les fichiers CSV.
+- `toProcess/`: Répertoire contenant les fichiers CSV à traiter.
+- `result/`: Répertoire où les résultats sont stockés.
+- `already_processed/`: Répertoire où les fichiers traités sont déplacés.
+
+## Prérequis
+
+- Python 3.9
+- Apache Airflow
+- Pandas
+
+## Installation
+
+1. Clonez ce dépôt :
+
+    ```sh
+    git clone https://github.com/votre-utilisateur/votre-repo.git
+    cd votre-repo
+    ```
+
+2. Créez et activez un environnement virtuel :
+
+    ```sh
+    python -m venv airflow_env
+    source airflow_env/bin/activate
+    ```
+
+3. Installez les dépendances :
+
+    ```sh
+    pip install requirements.txt
+    ```
+
+4. Configurez Airflow :
+
+    ```
+    airflow db init
+    airflow users create \
+        --username admin \
+        --firstname Admin \
+        --lastname User \
+        --role Admin \
+        --email admin@example.com \
+        --password admin
+    ```
+
+## Utilisation
+
+1. Démarrez le serveur web et le scheduler d'Airflow :
+
+    ```
+    airflow webserver --port 8080
+    airflow scheduler
+    ```
+
+2. Accédez à l'interface graphique d'Airflow via [http://localhost:8080](http://localhost:8080).
+
+3. Activez le DAG `housing_data_dag` et déclenchez-le manuellement si nécessaire.
+
+4. Placez vos fichiers CSV dans le répertoire `toProcess` pour qu'ils soient traités par le pipeline.
+
+## Dépannage
+
+- **Problèmes de chemin** : Assurez-vous que tous les chemins dans `housing_data_dag.py` sont corrects et absolus.
